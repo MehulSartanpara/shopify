@@ -1,0 +1,147 @@
+// Add to cart product using AJAX please Save This 
+
+
+<div class="Tab-container">
+  <h2>Trending Collections</h2>
+    <div class="container-tab">
+      
+          <ul class="tabs">
+            {% for block in section.blocks %}
+                  <li class="tab-link  {% if forloop.first == true %}current{% endif %}" data-tab="tab-{{forloop.index}}">{{ block.settings.first_tab_name }}</li>
+            {% endfor %} 
+          </ul>
+ 
+         {% for block in section.blocks %}
+          <div id="tab-{{ forloop.index}}" class="tab-content {% if forloop.first == true %}current{% endif %}">
+              <div class="first-tab-collection">
+                  <h3>{{ block.settings.section_name_1 }}</h3>
+                  <div class="first-tab-collection-img-div">
+                    {% for product in collections[block.settings.feature_collection].products limit:4 %}
+                    <div class="info-con">
+                        <div class="tab-1-img">
+                            <a href="{{ product.url }}">
+                              <img src="{{ product.featured_image | img_url: 'medium' | format: 'jpg' }}" alt="{{ block.settings.slide_heading }}">
+                          </a> 
+                        </div>
+                        <div class="tab-1-titles">
+                            <h3>{{ product.title }}</h3>
+                            <h4>{{ product.price | money }}</h4>
+                        </div>
+                    		<form action="" method="post">
+							                <input type="hidden" name="id" class="in " value="{{ product.variants.first.id }}" />
+                            	<input min="1" type="number" value="1" class="quantity" /><br>
+                            	<input type="submit" name="add" value="Add to cart" class="btn--purchase" >
+						            </form>
+                     
+                    </div>
+                     {% endfor %}
+                  </div>
+              </div> 
+          </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+  
+$(document).ready(function(){
+  
+  $(".btn--purchase").click(function(a){
+    a.preventDefault();
+    var v_id = $(this).closest('form').find('.in').val();
+    var q = $(this).closest('form').find('.quantity').val();
+//     console.log(v_id);
+//     console.log(q);
+    
+    
+    
+    var prod_data = {
+    	id: v_id,
+    	quantity: q
+  	}
+// console.log(prod_data);   
+     $.ajax({
+      type: 'POST', 
+      url: '/cart/add.js',
+      dataType: 'json', 
+      data: prod_data,
+      success: function (product){
+		// When Product Enter in Cart print product details in console        
+        console.log(product);
+    },
+    error: function(){  
+      // when error
+      console.log("error");
+    }
+    });
+
+  }); 
+  
+});   
+  
+  
+</script>
+
+
+
+{% schema %}
+ {
+ 	"name": "Tabing Section",
+ 	"settings": [
+	
+ 	],
+
+	"blocks": [
+        {
+        "type": "block",
+        "name": "block",
+          "settings": [
+          {
+ 		"type": "text",
+ 		"id": "first_tab_name",
+ 		"label": "Choose Tab Name"
+ 	},
+	{
+ 		"type": "text",
+ 		"id": "section_name_1",
+ 		"label": "Cho0se Collection Collection Name"
+ 	},
+ 	{
+ 		"type": "collection",
+ 		"id": "feature_collection",
+ 		"label": "Choose Collection to show on Tab"
+ 	}
+        ]
+      }
+    ],
+ 		"presets": [
+ 		{
+ 			"name": "Tabing Section",
+ 			"category": "collections"
+ 		}
+ 	]
+ }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+
+<script>
+//     $(document).ready(function(){
+//     $(".btn--purchase").click(function(a){
+//      a.preventDefault();
+// 	$(this).prev().addClass('sdafsdf');  
+//   });
+    
+//   $(".btn--purchase").click(function(a){
+//     a.preventDefault();
+//     $(this).parent().parent().find('.tab-1-img').addClass('okey');  
+//   });    
+//   });
+</script>    
+
+

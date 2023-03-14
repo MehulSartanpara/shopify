@@ -1,0 +1,227 @@
+<div class="Tab-container">
+  <h2>Trending Collections</h2>
+  <div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">{{ section.settings.first_tab_name }}</button>
+    <button class="tablinks" onclick="openCity(event, 'Paris')">{{ section.settings.second_tab_name}}</button>
+    <button class="tablinks" onclick="openCity(event, 'Tokyo')">{{ section.settings.third_tab_name }}</button>
+  </div>
+
+  <div id="London" class="tabcontent">
+    <div class="first-tab-collection">
+      <h3>{{ section.settings.section_name_1 }}</h3>
+      <div class="first-tab-collection-img-div">
+        {% for product in collections[section.settings.feature_collection].products limit:4 %}
+        <div class="info-con">
+        	<div class="tab-1-img">
+            	<a href="{{ product.url }}"><img src="{{ product.featured_image | img_url: 'medium' | format: 'jpg' }}" alt="{{ block.settings.slide_heading }}"></a> 
+        	</div>
+        	<div class="tab-1-titles">
+            	<h3>{{ product.title }}</h3>
+            	<h4>{{ product.price | money | remove: '.00' }}</h4>
+        	</div>
+        </div>
+         {% endfor %}
+      </div>
+    </div> 
+  </div>
+
+  <div id="Paris" class="tabcontent">
+    <div class="first-tab-collection">
+      <h3>{{ section.settings.section_name_2 }}</h3>
+      <div class="first-tab-collection-img-div">
+        {% for product in collections[section.settings.feature_collection_2].products limit:4 %}
+        <div class="info-con">
+        	<div class="tab-1-img">
+            	<a href="{{ product.url }}"><img src="{{ product.featured_image | img_url: 'medium' | format: 'jpg' }}" alt="{{ block.settings.slide_heading }}"></a> 
+        	</div>
+        	<div class="tab-1-titles">
+            	<h3>{{ product.title }}</h3>
+            	<h4>{{ product.price | money | remove: '.00' }}</h4>
+        	</div>
+        </div>
+         {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div id="Tokyo" class="tabcontent">
+    <div class="first-tab-collection">
+      <h3>{{ section.settings.section_name_3 }}</h3>
+      <div class="first-tab-collection-img-div">
+        {% for product in collections[section.settings.feature_collection_3].products limit:4 %}
+        <div class="info-con">
+        	<div class="tab-1-img">
+            	<a href="{{ product.url }}"><img src="{{ product.featured_image | img_url: 'medium' | format: 'jpg' }}" alt="{{ block.settings.slide_heading }}"></a> 
+        	</div>
+        	<div class="tab-1-titles">
+            	<h3>{{ product.title }}</h3>
+            	<h4>{{ product.price | money | remove: '.00' }}</h4>
+        	</div>
+        </div>
+         {% endfor %}
+      </div>
+    </div> 
+  </div>
+</div>
+{% schema %}
+ {
+ 	"name": "Tabing Section",
+ 	"settings": [
+	{
+ 		"type": "text",
+ 		"id": "first_tab_name",
+ 		"label": "Chose Tab Name"
+ 	},
+	{
+ 		"type": "text",
+ 		"id": "section_name_1",
+ 		"label": "Chose Collection Collection Name"
+ 	},
+ 	{
+ 		"type": "collection",
+ 		"id": "feature_collection",
+ 		"label": "Chose Collection to show on Tab-1"
+ 	},
+	{
+ 		"type": "text",
+ 		"id": "second_tab_name",
+ 		"label": "Choose Tab Name"
+ 	},
+ 	{
+ 		"type": "text",
+ 		"id": "section_name_2",
+ 		"label": "Chose Collection Collection Name"
+ 	},
+	{
+ 		"type": "collection",
+ 		"id": "feature_collection_2",
+ 		"label": "Chose Collection to show on Tab-2"
+ 	},
+ 	{
+ 		"type": "text",
+ 		"id": "third_tab_name",
+ 		"label": "Choose Tab Name"
+	 },
+ 	{
+ 		"type": "text",
+ 		"id": "section_name_3",
+ 		"label": "Chose Collection Collection Name"
+ 	},
+	{
+ 		"type": "collection",
+ 		"id": "feature_collection_3",
+ 		"label": "Chose Collection to show on Tab-2"
+ 	}
+ 	],
+ 		"presets": [
+ 		{
+ 			"name": "Tabing Section",
+ 			"category": "collections"
+ 		}
+ 	]
+ }
+{% endschema %}
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = $(".tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+//     $('tabcontent[i]').css("display","none");
+  }
+  tablinks = $(".tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+//   $('#cityName').css("display","block");
+  evt.currentTarget.className += " active";
+}
+
+	document.getElementById("defaultOpen").click();
+ 	//$('#defaultOpen').click();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.Tab-container {
+    max-width: 1365px;
+    margin: 0 auto;
+}
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+}
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  color: #fff
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.first-tab-collection-img-div {
+    display: flex;
+}
+.info-con {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+.first-tab-collection-img-div {
+    display: flex;
+    text-align: center;
+}
+
+
+

@@ -1,0 +1,121 @@
+<div id="ten-countdown" style="display: flex;">
+    <div class="number-minutes" style="display: flex;">
+      <div class="count-minutes" style="display: flex;"></div><span> &#58; </span>
+    </div>
+    <div class="number-seconds" style="display: flex;">
+      <div class="count-seconds" style="display: flex;"></div>
+    </div>
+</div>
+
+
+
+<script>
+
+  function setCookie(cname, cvalue, days) {
+  const d = new Date();
+  d.setTime(d.getTime() + (days*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return null;
+}
+
+$(document).ready(function(){
+  jQuery.getJSON('/cart.js', function(cart) {
+    if (cart.item_count > 0){
+      var minutesToAdd=1;
+      var today = new Date();
+      var  countDownDate = new Date(today.getTime() + minutesToAdd*600000).getTime();
+      var now = new Date().getTime();
+      var gtcooki =  getCookie("countdown-timer");
+    if(gtcooki == null){
+        setCookie("countdown-timer",countDownDate,1);
+    }else{
+        var  countDownDate = gtcooki;
+    }
+    var x = setInterval(function() {
+      var now = new Date().getTime();
+      var distance = countDownDate - now;
+      
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      var Milliseconds= Math.floor((distance %( 1000 )) / 10);
+      
+      var minutes1 = String(minutes).split('').map(Number);
+      var seconds1 = String(seconds).split('').map(Number);
+      
+      var Milliseconds1 = String(Milliseconds).split('').map(Number);
+  
+      if (distance < 0) {
+        clearInterval(x);
+        $(".count-minutes").html('<span>0</div><span>0</div>');
+        $(".count-seconds").html('<span>0</div><span>0</div>');
+        $('#ten-countdown').html('Opps! Time’s up');
+         setTimeout(function(){
+         let url = '/cart/clear';
+            $.ajax({
+              url:url,
+              type:'GET',
+              success: function(product){
+                 document.cookie = "countdown-timer=''; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                location.reload();
+              }
+            });
+         },500);
+      }else{
+         if (minutes < 10 ) {
+          $(".count-minutes").html('<span>0</span><span>'+minutes1[0]+'</span>');
+        } else {
+          $(".count-minutes").html('<span>'+minutes1[0]+'</span><span>'+minutes1[1]+'</span>');
+        }
+  
+        if (seconds < 10 ) {
+          $(".count-seconds").html('<span>0</span><span>'+seconds1[0]+'</span>');
+        } else {
+          $(".count-seconds").html('<span>'+seconds1[0]+'</span><span>'+seconds1[1]+'</span>');
+        }
+     }
+  });
+  }
+ });
+
+
+  
+});
+
+</script>
+
+<style>
+  #ten-countdown {
+    margin-top: 15px;
+    font-size: 18px;
+  }
+  .number-minutes {
+    background: #000;
+    color: #fff;
+    padding: 10px 5px 10px 10px;
+}
+  .count-minutes span:last-child {
+    margin-right: 5px;
+}
+  .number-seconds {
+    background: #000;
+    color: #fff;
+    padding: 10px 9px 10px 0px;
+}
+</style>                

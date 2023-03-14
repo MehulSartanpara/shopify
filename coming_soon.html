@@ -1,0 +1,20 @@
+{% assign product_tags = false %}
+{% for tag in product.tags %}          
+  {% if tag == 'come_soon' %}
+      {% assign  product_tags =  true %}  
+  {% endif %}
+{% endfor %}
+<div class="price__badges price__badges--listing">
+  <span class="price__badge price__badge--sale" aria-hidden="true">
+    <span>{{ 'products.product.on_sale' | t }}</span>
+  </span>
+   {% if product_tags == true  %}
+      <span class="price__badge price__badge--sold-out">
+        <span> Coming Soon </span>
+      </span>
+    {% else %}
+      <span class="price__badge price__badge--sold-out">
+        <span>{{ 'products.product.sold_out' | t }}</span>
+      </span>
+    {% endif %}
+</div>

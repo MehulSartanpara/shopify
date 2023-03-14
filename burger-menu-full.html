@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+
+    <!-- GSAP 3 Javascript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js" defer></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
+
+    <title>text</title>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      ul{
+        text-decoration: none;
+        list-style: none;
+      }
+        .container {
+            max-width: 1920px;
+            margin: 0 auto;       
+      }
+      .header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: mediumslateblue;
+          color: #fff;
+          padding: 20px 15px;
+      }
+      .head-part .open-icon {
+          font-size: 30px;
+          cursor: pointer;
+      }
+      .burger-menu {
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          background-color: #fff;
+          max-width: 400px;
+          width: 100%;
+          padding: 60px 30px;
+          background-color: grey;
+          transform: translate(-100%, 0px);
+          transition: all 0.5s ease;
+      }
+     .burger-menu i {
+          position: absolute;
+          top: 23px;
+          left: 17px;
+          font-size: 40px;
+          cursor: pointer;
+      }
+      .menu-is-open{
+        transform: translate(0, 0);
+      }
+      .link-container ul li {
+          padding: 4px 38px;
+          font-size: 20px;
+          cursor: pointer;
+      }
+      .model {
+          text-align: center;
+          padding-top: 400px;
+      }
+      .model button {
+        font-size: 16px;
+        padding: 12px;
+        border-radius: 7px;
+        color: #fff;
+        background-color: red;
+        border: none;
+        cursor: pointer;
+    }
+    .popUp-container {
+        position: fixed;
+        top: 30%;
+        left: 30%;
+        background-color: violet;
+        min-height: 300px;
+        min-width: 800px;
+        box-shadow: 1px 1px 43px 20px lightblue;
+        opacity: 0;
+        transform: scale(0.2);
+    }
+    .popUp-container i {
+        position: absolute;
+        top: 7px;
+        right: 14px;
+        font-size: 32px;
+        color: #fff;
+        cursor: pointer;
+    }
+    .popUp-container h1 {
+        text-align: center;
+        padding-top: 13%;
+        color: #fff;
+        font-size: 80px;
+        font-family: serif;
+    }
+    .PopUp-is-open{
+        opacity: 1;
+        transform: scale(1);
+        transition: all 0.5s ease;  
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+      <header>
+        <div class="header">
+          <div class="head-part">
+            <i class="fa fa-bars open-icon" aria-hidden="true"></i>
+            <div class="burger-menu">
+              <i class="fa fa-times" aria-hidden="true"></i>
+              <div class="link-container">
+                <ul>
+                  <li>Home</li>
+                  <li>Contact</li>
+                  <li>About</li>
+                  <li>Help</li>
+                  <li>Other</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="head-part">
+            <h1>DEMO</h1>
+          </div>
+        </div>
+      </header>  
+      <section>
+          <div class="model">
+            <button>Click to Open Model</button>
+          </div>
+      </section>
+    </div>
+
+    <popUp>
+        <div class="popUp-container">
+          <i class="fa fa-times" aria-hidden="true"></i>
+          <h1>Thank You</h1>
+        </div>
+    </popUp>
+
+
+
+
+    <script>
+        $(document).ready(function(){
+
+          // Burger Menu
+          $(".head-part .open-icon").click(function(){
+            $(".burger-menu").addClass("menu-is-open");
+          });
+          $(".burger-menu i").click(function(){
+            $(".burger-menu").removeClass("menu-is-open");
+          });
+
+          // PopUp
+          $(".model button").click(function(){
+            $(".popUp-container").addClass("PopUp-is-open");
+          });
+          $(".popUp-container i").click(function(){
+            $(".popUp-container").removeClass("PopUp-is-open");
+          });
+
+      });
+    </script>
+</body>
+</html>
+

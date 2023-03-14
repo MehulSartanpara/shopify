@@ -1,0 +1,341 @@
+//click to play video on full screen
+//on customize option
+<section class="real-result">
+  <div class="containers">
+   {% if section.settings.mission_headding !=blank %}
+        <h2 class="mission-hedding">{{ section.settings.mission_headding }}</h2>
+   {% endif %}
+    <div class="main-real multiple-items">
+      {% for block in section.blocks %}
+      <div class="real-video">
+        <img src="{{ block.settings.main_img |img_url: "master" }}">
+        <div class="video-button">
+          <a href="javascript:void(0)"><img src="{{ block.settings.button_img |img_url: "master" }}"></a>
+        </div> 
+      </div>      
+      {% endfor %}
+    </div>
+    <div class="madicine_people">
+    <img src="{{ section.settings.madicine_image |img_url: "master" }}">
+  </div>
+    {% comment %}
+    {% for block in section.blocks %}
+    <div id="videostory" class="mfp-hide">
+      <span class="closess"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0002 10.586L4.70718 3.29297L3.29297 4.70718L10.586 12.0002L3.29297 19.2933L4.70718 20.7075L12.0002 13.4145L19.2933 20.7075L20.7075 19.2933L13.4145 12.0002L20.7075 4.70723L19.2933 3.29302L12.0002 10.586Z" fill="white"></path></svg></span>
+      <video controls>
+        <source src="https://cdn.shopify.com/s/files/1/0268/8647/1732/files/videoplayback.mp4?v=1652935243" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    
+     {% endfor %}
+    {% endcomment %}
+    <div class="full-page-wrapper-popup">
+     
+      <div class="swiper swiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+          <div class="swiper-slide video-slide" data-sl-index="{{forloop.index0}}">
+            <div class="video-container">
+              <video controls autoplay>
+                <source src="{{block.settings.videoUrl}}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev swiper-btn"><svg width="22" height="13" viewBox="0 0 22 13" fill="none"><path d="M0.999907 11.9999L10.9998 2L20.9999 12" stroke="white" stroke-width="2.2"></path></svg></div>
+        <div class="swiper-button-next swiper-btn"><svg width="22" height="13" viewBox="0 0 22 13" fill="none"><path d="M0.999907 1.00013L10.9998 11L20.9999 1" stroke="white" stroke-width="2.2"></path></svg></div>
+
+      </div>
+       <span class="close-popup"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0002 10.586L4.70718 3.29297L3.29297 4.70718L10.586 12.0002L3.29297 19.2933L4.70718 20.7075L12.0002 13.4145L19.2933 20.7075L20.7075 19.2933L13.4145 12.0002L20.7075 4.70723L19.2933 3.29302L12.0002 10.586Z" fill="white"></path></svg></span>
+    </div>
+  </div>
+  
+</section>
+<style>
+
+  .full-page-wrapper-popup {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index:1;
+    display:none;
+    height:100%;
+}
+.video-container {
+    width: 100%;
+    text-align: center;
+    background-color: #000;
+    height: 100%;
+   
+}
+ .full-page-wrapper-popup .swiper-btn {
+    backdrop-filter: blur(100px);
+    background-color: rgba(255,255,255,.2);
+    width: 40px;
+    height: 40px;
+   	border-radius:50%;
+}
+  .swiper-btn:after{
+  	display:none;
+  }
+  .video-container video {
+  	height:100vh;
+  }
+  
+  body.overfow-hidden{
+  	overflow:hidden;
+  }
+  html.overfow-hidden{
+  	overflow:hidden;
+  }
+  .full-page-wrapper-popup .swiper {
+    width: 100%;
+    height: 100%;
+}
+.full-page-wrapper-popup .swiper-button-prev {
+    right: 10px;
+    left: auto;
+    top: calc(50% - 15px);
+    transform: translate(0,-50%);
+}
+.full-page-wrapper-popup .swiper-button-next {
+    right: 10px;
+    left: auto;
+    bottom: calc(50% - 15px);
+    transform: translate(0,50%);
+    top: auto;
+}
+.full-page-wrapper-popup span.close-popup {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 20px;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255,255,255,.2);
+    cursor: pointer;
+    transition: background-color 150ms ease-in;
+    border-radius: 50%;
+    backdrop-filter: blur(100px);
+    left: 20px;
+    right: auto;
+}
+  .main-real button.slick-prev.pull-left.slick-arrow {
+  	z-index:2;
+  }
+  .real-video img{
+    border-radius: 15px;
+}
+  .main-real button{
+  	width:42px;
+  }
+  .real-video  img {
+    box-shadow: 3px 4px #0000001a;
+}
+    @media only screen and (max-width: 991px) {
+      .madicine_people{
+      	display:none;
+      }
+    }
+  @media only screen and (max-width: 480px) {
+    .video-button {
+      left: 50%;
+      transform: translate(-50%,0);
+    }
+    .main-real .slick-arrow {
+    	display:none;
+    }
+}
+
+</style>
+<script>
+  
+const swiper = new Swiper('.swiper', {
+  // Optional parameters
+  direction: 'vertical',
+ 
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  }
+  
+});
+  var sliderVideos = $(".swiper-slide video");
+ swiper.on('slideChange', function (event) {
+    sliderVideos.each(function( index ) {
+    this.currentTime = 0;
+      this.pause();
+  });
+    $('.swiper-slide-duplicate-active').find('video').trigger('stop');
+    var prevVideo =  $("[data-sl-index=" + this.previousIndex + "]").find("video");
+  var currentVideo =  $("[data-sl-index=" + this.realIndex + "]").find("video");
+  prevVideo.trigger('stop');
+  currentVideo.trigger('play');
+});
+  $(document).ready(function(){
+    var sliderVideos = $(".swiper-slide video");
+    sliderVideos.each(function( index ) {
+      this.currentTime = 0;
+      this.pause();
+    });
+    $(document).on('click','.video-button',function(){
+      $(".full-page-wrapper-popup").show();
+      $('body').addClass('overfow-hidden');
+       $('html').addClass('overfow-hidden');
+           let slideIndex = $(this).closest('.slick-slide').attr('data-slick-index');
+         swiper.slideTo(slideIndex);
+    });
+        $(document).on('click','.close-popup',function(){
+      var sliderVideos = $(".swiper-slide video");
+      sliderVideos.each(function( index ) {
+        this.currentTime = 0;
+        this.pause();
+       
+      });
+     
+      $(".full-page-wrapper-popup").hide();
+      $('body').removeClass('overfow-hidden');
+      $('html').removeClass('overfow-hidden');
+    });
+  });
+
+</script>
+
+{% schema %}
+  {
+    "name": "Result Video",
+    "settings": [
+		{
+			"type": "text",
+			"id": "mission_headding",
+			"label": "Enter title"
+		},
+       {
+			"type": "image_picker",
+			"id": "madicine_image",
+			"label": "Enter image"
+		}
+],
+ "blocks": [
+        {
+        "type": "block",
+        "name": "Video",
+  		
+          "settings": [
+          {
+            "type": "image_picker",
+            "id": "main_img",
+            "label": "Enter image"
+          },
+		  {
+            "type": "url",
+            "id": "button_url",
+            "label": "Enter Url"
+          },
+		  {
+            "type": "image_picker",
+            "id": "button_img",
+            "label": "Enter Image"
+          },
+		  {
+            "type": "text",
+            "id": "videoUrl",
+            "label": "Video Url"
+          }
+
+        ]
+      }
+    ],
+"presets":[
+	{
+		"name": "Result Video",
+		"category": "text"
+	}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+
+
+
+
+
+
+
+
+<div class="skin-video">
+  <div class="container">
+    <div class="skin-video-inner">
+      {% for block in section.blocks %}
+        <div class="skin-video-block skin-video-{{ block.id }}">
+          <div class="skin-video-block-inner">
+          {% if block.settings.image != blank %}
+               <img src="{{ block.settings.image | img_url:'master' }}" class="vdo-1-play">
+            {% endif %}
+            <div class="play--btn">
+              {% render 'play-btn-icon' %}
+            </div>
+            <div id="skin-video">
+                <span class="close-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" fill="none" viewBox="0 0 18 17">
+                    <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
+                  </svg>
+                </span>
+                {%- if block.settings.video_url.type == 'youtube' -%}
+                  <iframe src="https://www.youtube.com/embed/{{ block.settings.video_url.id }}?enablejsapi=1" class="js-youtube" allow="autoplay; encrypted-media"></iframe>
+                {%- elsif block.settings.video_url.type == 'vimeo' -%}
+                <iframe src="https://player.vimeo.com/video/{{ block.settings.video_url.id }}" class="js-vimeo" allow="autoplay; encrypted-media"></iframe>
+                {% elsif block.settings.video_url2 != blank %}
+                <video class="video" width="100%" height="100%" style="background: #000;" controls>
+                  <source src="{{ block.settings.video_url2 }}" type="video/mp4">
+                </video>
+              {%- endif -%}
+            </div>       
+          </div>
+          {% if block.settings.video_title != blank %}
+            <h3>{{ block.settings.video_title }}</h3>
+          {% endif %}             
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+// Skin-Video Play section JS
+$(document).ready(function(){
+  if( $('.skin-video').length){
+  $(".skin-video .play--btn").click(function(event){ 
+       event.preventDefault();
+    $(this).closest('.skin-video-block').find("#skin-video").addClass("video-play");
+  });
+   $('.skin-video #skin-video .close-btn').click(function(){
+        $(this).closest('.skin-video-block').find('#skin-video iframe').attr('src', $(this).closest('.skin-video-block').find('#skin-video iframe').attr('src'));
+        $(this).closest('.skin-video-block').find("#skin-video").removeClass("video-play");
+        return false;
+    });
+   $('.skin-video #skin-video .close-btn').click(function(){
+       $(this).closest('.skin-video-block').find("#skin-video video").get(0).pause();
+       $(this).closest('.skin-video-block').find("#skin-video video").get(0).currentTime = 0;
+       $(this).closest('.skin-video-block').find("#skin-video").removeClass("video-play");
+   });
+  }
+});

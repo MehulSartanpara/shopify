@@ -1,0 +1,36 @@
+git Commands
+
+      
+git init
+git commit -m "first time dawn theme commit"
+git add .
+git commit -m "first commit"
+git push -u origin main
+git branch
+git status
+git commit -m "change in theme.liquid file"
+git add .
+
+
+
+
+
+Php laravel add project to github
+
+- create new repositiry
+
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/MehulWebunity/demo.git
+git push -u origin main
+
+after change run this commant for update your files
+
+git status
+git add .
+git commit -m "First time push"
+git push
+git status
+

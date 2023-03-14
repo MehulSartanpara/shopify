@@ -1,0 +1,183 @@
+<div class="Tab-container">
+  <h2>Trending Collections</h2>
+<div class="container-tab">
+      <ul class="tabs">
+        {% for block in section.blocks %}
+              <li class="tab-link  {% if forloop.first == true %}current{% endif %}" data-tab="tab-{{ forloop.index}}">{{ block.settings.first_tab_name }}</li>
+        {% endfor %} 
+      </ul>
+
+     {% for block in section.blocks %}
+      <div id="tab-{{ forloop.index}}" class="tab-content {% if forloop.first == true %}current{% endif %}">
+          <div class="first-tab-collection">
+              <h3>{{ block.settings.section_name_1 }}</h3>
+              <div class="first-tab-collection-img-div">
+                {% for product in collections[block.settings.feature_collection].products limit:4 %}
+                <div class="info-con">
+                    <div class="tab-1-img">
+                        <a href="{{ product.url }}"><img src="{{ product.featured_image | img_url: 'medium' | format: 'jpg' }}" alt="{{ block.settings.slide_heading }}"></a> 
+                    </div>
+                    <div class="tab-1-titles">
+                        <h3>{{ product.title }}</h3>
+                        <h4>{{ product.price | money | remove: '.00' }}</h4>
+                    </div>
+                </div>
+                 {% endfor %}
+              </div>
+          </div> 
+      </div>
+    {% endfor %}
+</div>
+</div>
+{% schema %}
+ {
+ 	"name": "Tabing Section",
+ 	"settings": [
+	
+ 	],
+	"blocks": [
+        {
+        "type": "block",
+        "name": "block",
+          "settings": [
+          {
+ 		"type": "text",
+ 		"id": "first_tab_name",
+ 		"label": "Chose Tab Name"
+ 	},
+	{
+ 		"type": "text",
+ 		"id": "section_name_1",
+ 		"label": "Chose Collection Collection Name"
+ 	},
+ 	{
+ 		"type": "collection",
+ 		"id": "feature_collection",
+ 		"label": "Chose Collection to show on Tab-1"
+ 	}
+        ]
+      }
+    ],
+ 		"presets": [
+ 		{
+ 			"name": "Tabing Section",
+ 			"category": "collections"
+ 		}
+ 	]
+ }
+{% endschema %}
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$(document).ready(function(){
+  
+  $('ul.tabs li').click(function(){
+    var tab_id = $(this).attr('data-tab');
+
+    $('ul.tabs li').removeClass('current');
+    $('.tab-content').removeClass('current');
+
+    $(this).addClass('current');
+    $("#"+tab_id).addClass('current');
+  })
+  
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* CUSTOME TABING SECTION STYLES  */
+
+.Tab-container {
+    max-width: 1365px;
+    margin: 0 auto;
+}
+.first-tab-collection-img-div {
+    display: flex;
+}
+.info-con {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+.first-tab-collection-img-div {
+    display: flex;
+    text-align: center;
+}
+.container-tab{
+  width: 100%;
+  margin: 0 auto;
+}
+
+
+
+ul.tabs {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+}
+ul.tabs li{
+  background: none;
+  color: #fff;
+  display: inline-block;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+ul.tabs li.current{
+  background: #ededed;
+  color: #222;
+}
+
+.tab-content{
+  display: none;
+  background: #FCFCFC;
+  padding: 15px;
+}
+
+.tab-content.current{
+  display: inherit;
+}

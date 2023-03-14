@@ -1,0 +1,90 @@
+<div class="quantity-container">
+  <div class="product-form__input product-form__quantity">
+    <div class="quantity-box">
+      <span class="btnqty qtyminus  icon-minus">-</span>
+      <input type="text" 
+             id="quantity-{{ item.index | plus: 1 }}" 
+             name="quantity" 
+             value="{{ item.quantity }}" 
+             min="1" 
+             class="quantity-selector 
+                    quantity-input" 
+             data-index="{{ item.index | plus: 1 }}"
+             value="number">
+      <span class="btnqty qtyplus  icon-plus" @click="Sunrise.updateQuantity({{ forloop.index }}, ++qty)">+</span>
+    </div>
+  </div>
+</div>
+
+
+<script>
+$(document).on('click','.quantity-box .btnqty',function(){
+  
+      var qty = parseInt($(this).parent('.qtybox').find('.quantity-input').val());
+      if($(this).hasClass('qtyplus')) {
+        qty++;
+      }else {
+        if(qty > 1) {
+          qty--;
+        }
+      }
+      qty = (isNaN(qty))?1:qty;
+      $(this).parent('.qtybox').find('.quantity-input').val(qty);
+      $(this).closest('.cart__row--table').find('.cart__product-qty').val(qty);
+      $(this).closest('.cart__row--table').find('.cart__product-qty').trigger('change');
+      
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  $('.qtybox .btnqty').on('click', function(){
+    var qty = parseInt($(this).parent('.qtybox').find('.quantity-input').val());
+    if($(this).hasClass('qtyplus')) {
+      qty++;
+    }else {
+      if(qty > 1) {
+        qty--;
+      }
+    }
+    qty = (isNaN(qty))?1:qty;
+    $(this).parent('.qtybox').find('.quantity-input').val(qty);
+  });
+</script>
+
+<div class="qtybox">
+  <span class="btnqty qtyminus icon icon-minus">-</span>
+    <input type="text" id="quantity" name="quantity" value="1" min="1" class="quantity-selector quantity-input" readonly="">
+  <span class="btnqty qtyplus icon icon-plus">+</span>
+</div>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,208 @@
+{%- liquid
+  assign section_color = section.settings.color_scheme
+  assign menu = section.settings.menu
+  assign text_align = section.settings.text_alignment
+-%}
+
+<section class="featured-navigation bg-{{ section_color }}-background text-{{ section_color }}-text  border-t-grid border-grid-color relative" x-data="{ current_link: '' }">
+  <div class="bg-gradient-to-r from-{{ section_color }}-background-0 via-{{ section_color }}-background to-{{ section_color }}-background w-8 absolute top-0 right-0 bottom-0 lg:hidden pointer-events-none"></div>
+  <div class="section-x-padding py-theme-half overflow-x-auto">
+    <nav role="navigation">
+      <ul class="flex lg:flex-wrap lg:{{ text_align }} whitespace-nowrap -mx-4 ">
+        {%- for link in linklists[menu].links -%}
+         {% assign megamenu = false %}
+             {% for block in section.blocks %} 
+        	{% if block.settings.megamenu == link.title %} 
+             {% assign megamenu = true %}
+            {% endif %}
+        {% endfor %}
+          <li class="inline-block px-4 lg:px-8 {% if megamenu %} mega-menu {% endif %}"> 
+            <a {% if link.active %}aria-current="page"{% endif %} class="block py-theme-half hover:text-{{ section_color }}-accent " href="{{ link.url }}">{{ link.title }}</a>        
+       {% if megamenu %}
+             {% for block in section.blocks %} 
+            {% if block.settings.megamenu == link.title %} 
+            {% liquid 
+            	assign megamenu_1 = block.settings.megamenu_1 
+            	assign megamenu_2 = block.settings.megamenu_2
+            %}
+        		<div class="mega-menu-conatiner">
+                  	<div class="mega-menu-content">
+                      <div class="mega-menu-first-row">
+                        <div class="mega-menu-first-row-con">
+                          <h5>{{ block.settings.megamenu_1 }}</h5>    
+                          {%- for link in linklists[megamenu_1].links -%}
+                               <a class="block py-theme-half hover:text-{{ section_color }}-accent" href="{{ link.url }}">{{ link.title }}</a>
+                          {%- endfor -%}
+                        </div>
+                      </div>
+                      <div class="mega-menu-second-row">
+                        <div class="mega-menu-second-row-con">
+                          <h5>{{ block.settings.megamenu_2 }}</h5>    
+                          {%- for link in linklists[megamenu_2].links -%}
+                               <a class="block py-theme-half hover:text-{{ section_color }}-accent" href="{{ link.url }}">{{ link.title }}</a>
+                          {%- endfor -%}  
+                        </div>
+                      </div>
+                      <div class="mega-menu-third-row">
+                        <div class="mega-img-container">
+                          {% if block.settings.first_img != blank %}
+                          <div class="mega-img-first">
+                            <a href="{{ block.settings.img_link1 }}">
+                              <img src="{{ block.settings.first_img | img_url: 'master'}}" >
+                            </a>
+                              <h2>{{ block.settings.text_img_1 }}</h2>                          
+                          </div>
+                          {% endif %}
+                          {% if block.settings.second_img != blank %}
+                          <div class="mega-img-second">
+                            <a href="{{ block.settings.img_link2 }}">
+                             <img src="{{ block.settings.second_img | img_url: 'master'}}" >
+                            </a>
+                             <h2>{{ block.settings.text_img_2 }}</h2>                            
+                          </div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% endfor %}
+        	{% endif %}
+             </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+  </div>
+</section>
+
+
+
+<script>
+
+</script>
+
+
+
+
+{% schema %}
+  {
+    "name": "Single level navigation",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Menu",
+        "default": "main-menu",
+        "info": "This menu won't show dropdown items"
+      },
+      {
+        "type": "select",
+        "id": "text_alignment",
+        "label": "Text alignment",
+        "options": [
+          { "value": "justify-start", "label": "Left"},
+          { "value": "justify-center", "label": "Center"},
+          { "value": "justify-end", "label": "Right"}
+        ],
+        "default":   "justify-center"
+      },
+      {
+        "type":      "header",
+        "content":   "Color"
+      },
+      {
+        "type": "select",
+        "id": "color_scheme",
+        "label": "Color scheme",
+        "options": [
+            { "value": "primary", "label": "Primary"},
+            { "value": "secondary", "label": "Secondary"},
+            { "value": "tertiary", "label": "Tertiary"}
+        ],
+        "default":   "primary"
+      }
+    ],
+	"blocks": [
+     {
+       "name": "block",
+       "type": "block",
+       "settings": [
+         {
+           	"type": "text",
+			"id": "megamenu",
+			"label": "Enter title"
+         },
+	     {
+            "type": "link_list",
+            "id": "megamenu_1",
+            "label": "Select Mega Menu"
+         },
+	     {
+            "type": "link_list",
+            "id": "megamenu_2",
+            "label": "Select Mega Menu"
+         },
+		 {
+			"type": "image_picker",
+			"id": "first_img",
+			"label": "Enter images title"
+		 },
+		 {
+			"type": "url",
+			"id": "img_link1",
+			"label": "Enter images Link"
+		 },
+		 {
+           	"type": "text",
+			"id": "text_img_1",
+			"label": "Enter images title"
+         },
+		 {
+			"type": "image_picker",
+			"id": "second_img",
+			"label": "Select Images"
+		 },
+		 {
+			"type": "url",
+			"id": "img_link2",
+			"label": "Enter images Link"
+		 },
+		 {
+           	"type": "text",
+			"id": "text_img_2",
+			"label": "Enter images title"
+         }
+       ]
+     }
+   ],
+    "presets": [
+      {
+        "name": "Single level navigation",
+        "category": "Navigation"
+      }
+    ]
+  }
+{% endschema %}
+
+<sctipt>
+
+// MegaMenu JQuery
+$(document).ready(function() {
+    if ($(window).width() < 767) {
+        $(".mega-menu").click(function(event) {
+            event.preventDefault();
+            $(this).find(".mega-menu-conatiner").toggle()
+        });
+    } else {
+        $(".mega-menu").hover(function(event) {
+            event.preventDefault();
+            $(this).find(".mega-menu-conatiner").toggle()
+        });
+    }
+});
+</script>
+
+
+<style>
+  
+</style>

@@ -1,0 +1,100 @@
+<!-- How to get Particular product and its verient price  -->
+
+
+<div class="container-product">
+  	<h2 style="margin-top: 50px;">My Product</h2>
+  
+  	{%- assign product = section.settings.product -%}
+  	<div class="inner-product-container">
+      <div class="product-image-container">
+        <img src="{{ product.featured_image | img_url: 'master' }}">
+      </div>
+      <div class="product-info-container">
+        <div class="product-title">
+          <h2>{{ product.title }}</h2>
+          <h3><span class="regular-price"></span></h3>
+<!--           <div  id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+              {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+          </div> -->
+        </div>
+        <div class="product-veriant">
+        
+        </div>
+        <div class="product-buttons">	
+          <form method="post" action="/cart/add">
+            
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}"/> 
+            
+            <select name="id" class="variant--regular--price">
+              {%- for variant in product.variants -%}
+              
+              <option class="variant--price"
+                      {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                      {% if variant.available == false %}disabled{% endif %}
+                      value="{{ variant.id }}" data-value="{{ variant.price | money | strip_html }}"
+                      >
+                {{ variant.title }}
+                {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+<!--                         - {{ variant.price | money | strip_html }} -->
+              </option>
+              
+              {%- endfor -%}
+            </select>
+            <br><br>
+            
+		    <input min="1" type="number" id="quantity" name="quantity" value="1"/>
+            <button type="submit" value="Add to cart" class="pro-cart-btn">Add to Cart</button>
+		  </form>
+          <button class="pro-buy-btn">Buy Now</button>
+        </div>
+        <div class="product-dec">	
+          <div class="product__description rte">  
+                {{ product.description }}
+              </div>
+        </div>
+        
+      </div>
+  	</div>
+  
+  
+  
+</div>
+<script>
+  $(document).ready(function(){
+    var a=$('.variant--price').attr('data-value');
+      $('.regular-price').html(a);
+    
+  
+    $(".variant--regular--price").change(function() {
+      var a=$(this).find(':selected').attr('data-value');
+      $('.regular-price').html(a);
+});
+    
+  });
+  
+</script>
+
+{% schema %}
+  {
+    "name": "Product",
+    "settings": [
+ 		{
+ 			"type": "product",
+			"id" : 	"product",
+			"label":"Product"
+ 		}
+  		],
+ 	"presets": [
+		{
+ 			"name": "Product",
+ 			"category": "image /w text"
+ 		}
+ 	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

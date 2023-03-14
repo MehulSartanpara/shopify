@@ -1,0 +1,49 @@
+
+variant dropdown option with variant images
+
+<ul class="options-all-container">
+  {% for option in product.options_with_values %}
+  {% assign option_index = forloop.index0 %}
+    <li class="first-li swatch clearfix " data-option-index="{{ option_index }}" style="position:relative">
+        {% assign values = '' %}
+        {% for variant in product.variants %}
+        {% assign value = variant.options[option_index] %}
+        {% unless values contains value %}
+        {% assign values = values | join: ',' %}
+        {% assign values = values | append: ',' | append: value %}
+        {% assign values = values | split: ',' %}
+      {% if forloop.first %}
+      <div class="current-selected"> 
+        {% if current_variant.image != blank %}
+        <span class="vari-image"><img src="{{current_variant.image | img_url:'24x24'}}"/></span>  
+        {% endif %}
+        <span class="option-title"><strong>{{option.name}}</strong></span>
+        <span class="variant-title">{{option.selected_value}}</span>
+      </div>
+
+      <div class="main-swatche-element">
+        <div class="mobile-top-bar">          
+          <span >select</span>
+          <span class="cancle-drdn">cancle</span>
+        </div>
+      {% endif %}
+      
+        <div data-value="{{ value | escape }}" class="swatch-element {{ value | handle }}">
+          <label class="main-label" for="swatch-{{ option_index }}-{{ value | handle }}">
+          <input id="swatch-{{ option_index }}-{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if forloop.first %} checked{% endif %} {% unless variant.available %}disabled{% endunless %} />
+            {% if variant.image != blank %}
+            <span class="vari-image2"><img src="{{variant.image | img_url:'24x24'}}"/></span>
+            {% endif %}
+          <span class="sw-variant-title">
+            {{ value }} 
+          </span>
+          <span class="sw-variant-price">{{variant.price | money}}</span>
+          </label>
+        </div>
+
+        {% endunless %}
+        {% endfor %}
+       {% if forloop.first %}</div>{% endif %}
+    </li>
+  {% endfor %}
+</ul>

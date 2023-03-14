@@ -1,0 +1,41 @@
+             {% assign star = section.settings.details_images1 %}
+              {% for i in (1..star) %}
+              <img src="{{ section.settings.star_img | img_url: 'master' }}" />
+{% endfor %}
+             
+
+
+
+    {
+      "type": "image_picker",
+      "id": "star_img",
+      "label": "Star Image"
+    },
+    {
+      "type": "select",
+      "id": "details_images1",
+      "label": "Ratting",
+      "default": "1",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        }
+      ]
+    },
