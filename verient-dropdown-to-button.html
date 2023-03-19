@@ -3,29 +3,36 @@
 
 
 {% unless product.has_only_default_variant %}
-              {% for option in product.options_with_values %}
-                <label {% if option.name == 'default' %}class="label--hidden" {% endif %}for="SingleOptionSelector-{{ forloop.index0 }}">
-                  {{ option.name }}
-                </label>
-                {% assign option_position = forloop.index %}
-                <fieldset>
-                  {%- for value in option.values -%}
-                      <input type="radio" class="single-option-selector-{{ section.id }} "
-                        {% if option.selected_value == value %} checked="checked"{% endif %}
-                        value="{{ value | escape }}"
-                        data-index="option{{option_position}}"
-                        name="{{ option.name | handleize }}"
-                        id="SingleOptionSelector-{{option_position}}">
-                      <label for="SingleOptionSelector-{{ forloop.index0 }}">
-                        {{value}}
-                      </label>
-                  {%- endfor -%}
-                </fieldset>
-              {% endfor %}
-            {% endunless %}
+  {% for option in product.options_with_values %}
+    <label {% if option.name == 'default' %}class="label--hidden" {% endif %}for="SingleOptionSelector-{{ forloop.index0 }}">
+      {{ option.name }}
+    </label>
+    {% assign option_position = forloop.index %}
+    <fieldset>
+      {%- for value in option.values -%}
+          <input type="radio" class="single-option-selector-{{ section.id }} "
+            {% if option.selected_value == value %} checked="checked"{% endif %}
+            value="{{ value | escape }}"
+            data-index="option{{option_position}}"
+            name="{{ option.name | handleize }}"
+            id="SingleOptionSelector-{{option_position}}">
+          <label for="SingleOptionSelector-{{ forloop.index0 }}">
+            {{value}}
+          </label>
+      {%- endfor -%}
+    </fieldset>
+  {% endfor %}
+{% endunless %}
 
 
-
+$(document).ready(function(){
+  $(".SingleOptionSelector").hover(function() {
+    var NameVar = $(this).attr('data-Name');
+    console.log($(this).attr('data-Name'));
+    var ImageIs = $('.VarImage[data-var="'+NameVar+'"]').attr('data-image'); 
+    $(this).closest('.grid__item').find('.card__media img').attr('srcset',ImageIs);
+  });
+});
 
 
 
