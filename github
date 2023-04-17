@@ -1,0 +1,67 @@
+to put file in staging area - git add 
+
+git init
+git add .
+git commit -m "change title"
+
+to watch change - git status
+		more	- git log
+
+to remove init in project  - rm -rf .git
+
+
+git diff  ===> compare staging area with working directory (modified files). 
+
+git diff --staged ====> Compare previous commit to recent staging area.
+
+
+If you want to skip the "staging area" and want to "commit" file directly? then use this command [git commit -a -m "Your message." ]
+
+
+To Rename file
+- git mv <present-name> <new-name>
+
+To Delete file
+- git rm <file-name>
+
+To make the file untracked from tracked
+- git rm --cached <filename>
+
+
+- git merge <branch name to be merge>
+
+
+
+To create new branch and jump in new branch
+- git checkout -b <new-branch-name>
+ 
+To switch into different branch
+- git checkout <branch-name>
+
+TO check all the branches in git 
+- git branch
+
+- For New branch push in github
+- git push origin <branch-name>
+
+
+To make git 'status' to git 'st'
+COMMAND: git config --global alias.st 'status'
+
+Q. When will you use the alias command in git?
+A. When you were using the long command again and again.
+
+
+- git log (To view commits)
+- git log -p (shows changes in commits)
+- git log -p -2 (shows most recent 2 commits and its changes)
+- git log --stat (shows changes in commit in short summary)
+- git log --pretty=oneline (shows commits in one line with its message or changes made)
+- git log --pretty=short (shows commit author and message)
+- git log --pretty=full (shows commit author message and the person who committed)
+- git log --since=2.days (shows commit in the last two days)
+- git log --since=2.weeks (shows commit in the last two weeks)
+- git log --since=2.months (shows commit in the last two months)
+- git log -pretty=format:"%h - %an" (%h is hash commit and %an is author name) (search these options in git log documentation on google, a website will be there to see these options)
+- git log -pretty=format:"%h - %ae" (%h is hash commit and %ae is author email)
+- git commit --amend (make changes in latest commit, it opens the vim editor so see how it works, i to edit, escape then type :wq to save and exit it) (It will also merge the any staged file into this this too)
