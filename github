@@ -1,4 +1,4 @@
-For Chang global details in git
+For Change global details in git
 
 git config --global --edit
 It open VIM editor
