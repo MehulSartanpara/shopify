@@ -1,3 +1,10 @@
+For Chang global details in git
+
+git config --global --edit
+It open VIM editor
+After change press "Esc" and Type ":wq"
+
+
 to put file in staging area - git add 
 
 git init
