@@ -1,0 +1,92 @@
+class for button = popup-button
+<div class="popup-wrapper">
+  <div class="popup-content">
+    <button type="button" class="close-popup">
+      	&times;
+    </button>
+    <div class="popup-main-content">
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+ .popup-wrapper{
+    box-sizing: border-box;
+    opacity: 0;
+    position: fixed;
+    visibility: hidden;
+    z-index: -1;
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #d0d0d0e8;
+    height: 100%;
+    transition: all .3s ease-in-out;
+}
+.popup-wrapper.open{
+    opacity: 1;
+    visibility: visible;
+    z-index: 101;
+}
+.close-popup {
+    background-color: #fff;
+    border: 0.1rem solid #dbd6d6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 1.2rem;
+    z-index: 5;
+    width: 4rem;
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+}
+.popup-content{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    margin: 10rem auto 0;
+    background-color: #fff;
+    overflow: hidden;
+    max-width: 1440px;
+    --modal-height-offset: 10rem;
+    margin-top: 10rem;
+    width: 80%;
+    max-height: calc(100% - 10rem * 2);
+    overflow-y: auto;
+}
+.popup-main-content {
+    --modal-padding: 2.5rem;
+    overflow-y: auto;
+    padding: 2.5rem;
+    height: 100%;
+}
+</style>
+
+<script>
+ $(document).ready(function(){
+  $(document).on('click','.popup-button', function(e){
+    e.preventDefault();
+    $('.popup-wrapper').addClass('open');
+    $('body').css('overflow','hidden');
+  });
+  $(document).on('click','.close-popup', function(event){
+      $('.popup-wrapper').removeClass('open');
+      $('body').css('overflow','inherit');
+  });
+  $(document).on('click','.popup-wrapper.open', function(event){
+    if(event.target.classList.contains('popup-wrapper')){
+      $('.popup-wrapper').removeClass('open');
+      $('body').css('overflow','inherit');
+    }
+  });
+});
+</script>
