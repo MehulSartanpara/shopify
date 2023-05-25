@@ -1,9 +1,9 @@
 class for button = popup-button
 <div class="popup-wrapper">
   <div class="popup-content">
-    <button type="button" class="close-popup">
+    <span class="close-popup">
       	&times;
-    </button>
+    </span>
     <div class="popup-main-content">
       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
@@ -34,37 +34,26 @@ class for button = popup-button
     z-index: 101;
 }
 .close-popup {
-    background-color: #fff;
-    border: 0.1rem solid #dbd6d6;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
     padding: 1.2rem;
     z-index: 5;
-    width: 4rem;
     position: fixed;
     top: 2rem;
     right: 2rem;
+    font-size: 26px;
+    color: #fff;
 }
 .popup-content{
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%);
-    margin: 10rem auto 0;
-    background-color: #fff;
-    overflow: hidden;
-    max-width: 1440px;
-    --modal-height-offset: 10rem;
-    margin-top: 10rem;
-    width: 80%;
-    max-height: calc(100% - 10rem * 2);
-    overflow-y: auto;
+    transform: translate(-50%,-50%);
+    max-width: 1280px;
+    width: 100%;
+    max-height: 100%;
+    overflow: auto;
 }
 .popup-main-content {
-    --modal-padding: 2.5rem;
     overflow-y: auto;
     padding: 2.5rem;
     height: 100%;
@@ -72,6 +61,25 @@ class for button = popup-button
 </style>
 
 <script>
+ // JS
+document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.loyalty_page_banner .popup-button')) {
+      e.preventDefault();
+      document.querySelector('.popup-wrapper').classList.add('open');
+      document.body.classList.add('overflow_hidden');
+    } else if (e.target.closest('.close-popup')) {
+      document.querySelector('.popup-wrapper').classList.remove('open');
+      document.body.classList.remove('overflow_hidden');
+    } else if (e.target.closest('.popup-wrapper.open')) {
+      if (!e.target.closest('.popup-content')) {
+        document.querySelector('.popup-wrapper').classList.remove('open');
+        document.body.classList.remove('overflow_hidden');
+      }
+    }
+  });
+});
+// JQUERY
  $(document).ready(function(){
   $(document).on('click','.popup-button', function(e){
     e.preventDefault();
