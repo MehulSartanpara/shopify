@@ -1,0 +1,17 @@
+{% assign blog_handle = 'your-blog-handle' %}
+{% assign blog = blogs[blog_handle] %}
+
+{% if blog %}
+  <h1>{{ blog.title }}</h1>
+  <ul>
+    {% for article in blog.articles %}
+      <li>
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.content | strip_html | truncate: 200 }}</p>
+        <p>Published on {{ article.published_at | date: "%B %d, %Y" }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Blog not found.</p>
+{% endif %}

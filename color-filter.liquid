@@ -1,0 +1,441 @@
+<div class="hidden">
+    <style>
+        {% for block in section.blocks %}
+            {%- for i in (1..20) -%}
+                {%- capture variant_title -%}variant_title_{{i}}{%- endcapture -%}
+                {%- capture background_color -%}background_color_{{i}}{%- endcapture -%}
+                {%- capture background_image -%}background_image_{{i}}{%- endcapture -%}
+                {% if block.settings[variant_title] != blank %}
+                    .color_{{ block.settings[variant_title] | handle }} {
+                        background-color: {{ block.settings[background_color] }};
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        border-color: transparent;
+                        {% if block.settings[background_image] != blank %}background-image: url({{ block.settings[background_image] | img_url:"1024x1224" }});{% endif %}
+                    }
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </style>
+</div>
+
+{% schema %}
+    {
+        "name": "Color Swatch",
+        "settings": [
+        ],
+        "blocks":[
+            {
+                "type":"image",
+                "name":"Color Swatch",
+                "settings":[
+                    {
+                        "type": "header",
+                        "content": "Color option 1"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_1",
+                        "label":"Variant Title 1",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_1",
+                        "label":"Background Color 1"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_1",
+                        "label":"Background Image 1"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 2"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_2",
+                        "label":"Variant Title 2",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_2",
+                        "label":"Background Color 2"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_2",
+                        "label":"Background Image 2"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 3"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_3",
+                        "label":"Variant Title 3",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_3",
+                        "label":"Background Color 3"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_3",
+                        "label":"Background Image 3"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 4"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_4",
+                        "label":"Variant Title 4",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_4",
+                        "label":"Background Color 4"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_4",
+                        "label":"Background Image 4"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 5"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_5",
+                        "label":"Variant Title 5",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_5",
+                        "label":"Background Color 5"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_5",
+                        "label":"Background Image 5"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 6"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_6",
+                        "label":"Variant Title 6",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_6",
+                        "label":"Background Color 6"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_6",
+                        "label":"Background Image 6"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 7"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_7",
+                        "label":"Variant Title 7",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_7",
+                        "label":"Background Color 7"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_7",
+                        "label":"Background Image 7"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 8"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_8",
+                        "label":"Variant Title 8",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_8",
+                        "label":"Background Color 8"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_8",
+                        "label":"Background Image 8"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 9"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_9",
+                        "label":"Variant Title 9",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_9",
+                        "label":"Background Color 9"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_9",
+                        "label":"Background Image 9"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 10"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_10",
+                        "label":"Variant Title 10",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_10",
+                        "label":"Background Color 10"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_10",
+                        "label":"Background Image 10"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 11"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_11",
+                        "label":"Variant Title 11",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_11",
+                        "label":"Background Color 11"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_11",
+                        "label":"Background Image 11"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 12"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_12",
+                        "label":"Variant Title 12",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_12",
+                        "label":"Background Color 12"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_12",
+                        "label":"Background Image 12"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 13"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_13",
+                        "label":"Variant Title 13",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_13",
+                        "label":"Background Color 13"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_13",
+                        "label":"Background Image 13"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 14"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_14",
+                        "label":"Variant Title 14",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_14",
+                        "label":"Background Color 14"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_14",
+                        "label":"Background Image 14"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 15"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_15",
+                        "label":"Variant Title 15",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_15",
+                        "label":"Background Color 15"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_15",
+                        "label":"Background Image 15"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 16"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_16",
+                        "label":"Variant Title 16",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_16",
+                        "label":"Background Color 16"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_16",
+                        "label":"Background Image 16"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 17"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_17",
+                        "label":"Variant Title 17",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_17",
+                        "label":"Background Color 17"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_17",
+                        "label":"Background Image 17"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 18"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_18",
+                        "label":"Variant Title 18",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_18",
+                        "label":"Background Color 18"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_18",
+                        "label":"Background Image 18"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 19"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_19",
+                        "label":"Variant Title 19",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_19",
+                        "label":"Background Color 19"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_19",
+                        "label":"Background Image 19"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color option 20"
+                    },
+                    {
+                        "type":"text",
+                        "id":"variant_title_20",
+                        "label":"Variant Title 20",
+                        "info":"Variant Title Must be same given in product."
+                    },
+                    {
+                        "type":"color",
+                        "id":"background_color_20",
+                        "label":"Background Color 20"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"background_image_20",
+                        "label":"Background Image 20"
+                    }
+                ]
+            }
+        ],
+        "presets":[
+            {
+                "name":"Color Swatch"
+            }
+        ]
+    }
+{% endschema %}
